@@ -1,7 +1,4 @@
 name,mother,father,genotype,phenotype
 Lily,,,,blue
 James,,,,brown
-Harry,Lily,James,,brown
-Harry,,James,,
 Harry,Lily,James,,
-Harry,Lily,James,,blue

@@ -45,7 +45,7 @@ Person init_person(char *name, char *mother, char *father, char *genotype, char 
 void free_person(Person *person) {
     free(person->name);
     free(person->mother);
-    free(person->mother);
+    free(person->father);
     free(person->genotype);
     free(person->phenotype);
 }
@@ -105,7 +105,14 @@ void add_person(People *people, Person person) {
         people->data = mem;
     }
 
-    people->data[people->length] = person;
+    people->data[people->length] = init_person(
+        person.name,
+        person.mother,
+        person.father,
+        person.genotype,
+        person.phenotype
+    );
+
     people->length++;
 }
 
@@ -134,8 +141,7 @@ People read_family_csv(char *file) {
     People people = init_people(1);
     char ch;
     char *current_data[5];
-    char buf[MAX_LEN];
-    buf[0] = '\0';
+    char buf[MAX_LEN]; buf[0] = '\0';
     int i = 0;
 
     // Allocate memory for `current_data`
@@ -201,19 +207,9 @@ People read_family_csv(char *file) {
         if (verify_person(&person)) {
             add_person(&people, person);
         } else {
-            free(person.name);
-            free(person.mother);
-            free(person.father);
-            free(person.genotype);
-            free(person.phenotype);
+            free_person(&person);
         }
     }
-
-    // printf("\n<buffer>\n%s\n</buffer>\n", buf);
-
-    // for (int j = 0; j < NUM_ENTRIES; j++) {
-    //     printf("\n<arr[%i]>\n%s\n</arr[%i]>\n", j, current_data[j], j);
-    // }
 
     // Free all the data
     for (int j = 0; j < NUM_ENTRIES; j++) {

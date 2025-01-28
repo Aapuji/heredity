@@ -8,6 +8,8 @@ int main(void) {
     People people = read_family_csv(file);
     print_people(&people);
 
+    // print_person(&people.data[2]);
+
 
     return 0;
 }
