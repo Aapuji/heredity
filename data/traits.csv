@@ -1,0 +1,3 @@
+trait,gene,allele,dominance
+eye color,E1,B,dominant
+eye color,E1,b,recessive
